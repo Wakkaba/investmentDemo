@@ -1,69 +1,41 @@
-let Result = () => {
+import { calculateInvestmentResults, formatter } from "../util/investment";
+let Result = ({ investmentInfo }) => {
+  let investmentResults = calculateInvestmentResults(investmentInfo);
+  let initialInvest =
+    investmentResults[0].valueEndOfYear -
+    investmentResults[0].interest -
+    investmentResults[0].annualInvestment;
   return (
-    <div id="result">
-      <div className="center">
-        <table>
-          <thead>
-            <tr>
-              <th>Year</th>
+    <table id="result">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Investment Value</th>
+          <th>Interest (Year)</th>
+          <th>Total interest</th>
+          <th>Invest Capital</th>
+        </tr>
+      </thead>
+      <tbody>
+        {investmentResults.map((result) => {
+          const totalInterest =
+            result.valueEndOfYear -
+            result.annualInvestment * result.year -
+            initialInvest;
+
+          const totalAmountInv = result.valueEndOfYear - totalInterest;
+          return (
+            <tr key={result?.year}>
+              <td>{result?.year}</td>
+              <td>{formatter.format(result?.valueEndOfYear)}</td>
+              <td>{formatter.format(result?.interest)}</td>
+              <td>{formatter.format(totalInterest)}</td>
+              <td>{formatter.format(totalAmountInv)}</td>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <th>Investment Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <th>Interest (Year)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <th>Total interest</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <th className="cell">Invest Capital</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

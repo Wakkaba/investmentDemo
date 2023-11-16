@@ -61,14 +61,11 @@ body {
 }
 
 #result {
-  display: flex;
   max-width: 50rem;
   margin: 2rem auto;
   padding: 1rem;
   table-layout: fixed;
-  border-spacing: 1rem;
-  text-align: right;
-  justify-content: center;
+  border-spacing: 2rem;
 }
 
 #result thead {
@@ -80,19 +77,9 @@ body {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 0.85rem;
   color: #c2e9e0;
-}
-
-#result th {
-  white-space: nowrap;
+  text-align: center;
 }
 
 .center {
   text-align: center;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 3rem;
-  align-items: end;
-}
-.cell {
-  margin-bottom: 10px; /* Adjust the value to set the desired distance */
 }
